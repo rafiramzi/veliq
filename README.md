@@ -1,4 +1,4 @@
-# Garasiku
+# VELIQ
 
 Aplikasi Android (Expo + React Native + TypeScript) untuk mengurus kendaraan: odometer GPS otomatis, umur komponen, pengingat pajak STNK, rekam rute, dokumen digital, radar touring dengan SOS, dan Vehicle Passport PDF.
 
@@ -124,7 +124,7 @@ Yang belum ada (tahap berikutnya): tarik data dari cloud ke perangkat baru (*pul
 
 ## 5. Catatan penting
 
-- **Izin lokasi "Izinkan sepanjang waktu"** diperlukan agar odometer tetap merekam saat layar mati. Di HP Xiaomi/Oppo/Vivo, matikan juga *battery optimization* untuk Garasiku.
+- **Izin lokasi "Izinkan sepanjang waktu"** diperlukan agar odometer tetap merekam saat layar mati. Di HP Xiaomi/Oppo/Vivo, matikan juga *battery optimization* untuk VELIQ.
 - **Peta** memakai Leaflet + OpenStreetMap di WebView (tanpa API key). Untuk rilis publik dengan banyak pengguna, ganti URL tile di `src/components/LeafletMap.tsx` ke penyedia berbayar/gratis-terbatas (MapTiler, Stadia, dsb.) sesuai kebijakan penggunaan tile OSM.
 - **Mode demo touring**: tanpa Supabase, radar menampilkan 3 anggota simulasi (salah satunya sengaja tertinggal ±1 km) dan tombol "Simulasikan SOS" untuk menguji alarm.
 - **Tarif pajak** adalah estimasi (PNBP PP 60/2016, SWDKLLJ, opsen PKB 66%). Tarif PKB dan denda berbeda per provinsi; ubah di layar Pajak → Tarif.
