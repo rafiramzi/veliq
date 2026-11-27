@@ -24,7 +24,7 @@ export default function LoginScreen() {
     setBusy(provider);
     const res = await signInWithProvider(provider).catch((e) => ({ ok: false, message: String(e?.message ?? e) }));
     setBusy(null);
-    if (!res.ok) Alert.alert('Tidak bisa masuk', res.message);
+    if (!res.ok && res.message) Alert.alert('Tidak bisa masuk', res.message);
   };
 
   return (
