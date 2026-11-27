@@ -49,7 +49,7 @@ export default function ProfileScreen() {
             bg={isUser ? colors.goodSoft : colors.border}
           />
         </View>
-        <Row gap={8} style={{ marginTop: 18 }}>
+        <Row gap={8} style={{ marginTop: 18, width: '100%' }}>
           <Stat value={vehicleCount} label="Kendaraan" />
           <Stat value={tripCount} label="Perjalanan" />
           <Stat value={docCount} label="Dokumen" />
