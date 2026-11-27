@@ -51,7 +51,7 @@ export default function TabsLayout() {
           tabBarBadgeStyle: { backgroundColor: colors.good, color: '#fff', fontSize: 8 },
         }}
       />
-      <Tabs.Screen name="more" options={{ title: 'Lainnya', tabBarIcon: icon('dots-grid') }} />
+      <Tabs.Screen name="profile" options={{ title: 'Profil', headerTitle: 'Profil', tabBarIcon: icon('account-circle-outline') }} />
     </Tabs>
   );
 }

@@ -34,7 +34,6 @@ export default function VehicleEdit() {
   const save = () => {
     if (!name.trim() || !plate.trim()) return Alert.alert('Lengkapi data', 'Nama dan plat nomor wajib diisi.');
     const odometer = parseNumber(odo);
-    if (!existing && odometer <= 0) return Alert.alert('Odometer', 'Isi angka odometer saat ini (lihat di speedometer).');
 
     const base: Partial<Record<ComponentKey, ComponentBaseline>> = {};
     for (const [k, b] of Object.entries(baselines)) {
@@ -51,7 +50,7 @@ export default function VehicleEdit() {
       baselines: base,
     };
     if (existing) updateVehicle(existing.id, fields);
-    else addVehicle({ ...fields, odometerBaseKm: odometer });
+    else addVehicle({ ...fields, odometerBaseKm: odometer > 0 ? odometer : 0 });
     router.back();
   };
 
@@ -101,7 +100,7 @@ export default function VehicleEdit() {
           </Row>
         </Card>
       ) : (
-        <Field label="Odometer saat ini (km)" value={odo} onChangeText={setOdo} numeric placeholder="12500" hint="Lihat angka di speedometer. Selanjutnya bertambah otomatis dari GPS." />
+        <Field label="Odometer saat ini (km) — opsional" value={odo} onChangeText={setOdo} numeric placeholder="12500" hint="Lihat angka di speedometer. Kosongkan bila odometer rusak: jarak dihitung dari 0 lewat GPS dan bisa diatur nanti." />
       )}
 
       <SectionHeader title="Pajak & STNK" />

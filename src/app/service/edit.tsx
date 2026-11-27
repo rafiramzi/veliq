@@ -82,7 +82,7 @@ export default function ServiceEdit() {
     ];
     if (!items.length) return Alert.alert('Belum ada pekerjaan', 'Pilih minimal satu komponen atau isi pekerjaan lain.');
     const odometerKm = parseNumber(odo);
-    if (odometerKm <= 0) return Alert.alert('Odometer belum diisi');
+    if (!(odometerKm >= 0)) return Alert.alert('Odometer tidak valid');
 
     setSaving(true);
     try {
@@ -133,7 +133,7 @@ export default function ServiceEdit() {
       <Stack.Screen options={{ title: existing ? 'Edit Servis' : 'Catat Servis' }} />
       <Muted style={{ marginBottom: 12 }}>{vehicle.name} · {vehicle.plate}</Muted>
       <DateField label="Tanggal servis" value={date} onChange={(d) => d && setDate(d)} />
-      <Field label="Odometer saat servis (km)" value={odo} onChangeText={setOdo} numeric />
+      <Field label="Odometer saat servis (km) — opsional" value={odo} onChangeText={setOdo} numeric hint="Boleh 0 bila odometer rusak; umur komponen tetap dihitung dari jarak GPS dan tanggal." />
 
       <SectionHeader title="Komponen diganti / dikerjakan" />
       <Card style={{ paddingVertical: 4 }}>
