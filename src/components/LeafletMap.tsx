@@ -36,12 +36,16 @@ const HTML = `<!DOCTYPE html><html><head>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <style>
-  html,body,#map{height:100%;margin:0;background:#E2E8F0}
-  .lbl{background:#0F172A;color:#fff;border:none;border-radius:6px;font:600 11px sans-serif;padding:2px 6px;box-shadow:none}
+  html,body,#map{height:100%;margin:0;background:#1C1C1E}
+  .leaflet-tile-pane{filter:invert(1) hue-rotate(180deg) brightness(.9) contrast(.9)}
+  .leaflet-control-attribution{background:rgba(10,11,13,.7)!important;color:#8E8E93!important}
+  .leaflet-control-attribution a{color:#64B5FF!important}
+  .leaflet-bar a{background:#1C1C1E;color:#fff;border-color:#2C2C2E}
+  .lbl{background:#12304F;color:#fff;border:none;border-radius:6px;font:600 11px sans-serif;padding:2px 6px;box-shadow:none}
   .lbl:before{display:none}
   .pulse{animation:p 1s infinite}
   @keyframes p{0%{opacity:1}50%{opacity:.25}100%{opacity:1}}
-  .err{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:14px sans-serif;color:#475569;text-align:center;padding:20px}
+  .err{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font:14px sans-serif;color:#8E8E93;text-align:center;padding:20px}
 </style></head><body><div id="map"></div><script>
 (function(){
   function post(m){ window.ReactNativeWebView && window.ReactNativeWebView.postMessage(JSON.stringify(m)); }

@@ -3,8 +3,9 @@ import { useVehicleStore } from './vehicles';
 import { useDocStore, useServiceStore, useTripStore } from './records';
 import { useSettings } from './settings';
 import { useOutbox } from './outbox';
+import { useAuth } from './auth';
 
-const STORES = [useVehicleStore, useServiceStore, useTripStore, useDocStore, useSettings, useOutbox];
+const STORES = [useVehicleStore, useServiceStore, useTripStore, useDocStore, useSettings, useOutbox, useAuth];
 
 const isHydrated = () => STORES.every((s) => s.persist.hasHydrated());
 

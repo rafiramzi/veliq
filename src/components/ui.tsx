@@ -388,7 +388,7 @@ export const styles = StyleSheet.create({
   },
   segment: { flexDirection: 'row', backgroundColor: colors.border, borderRadius: radius.md, padding: 3 },
   segItem: { flex: 1, paddingVertical: 9, alignItems: 'center', borderRadius: radius.sm },
-  segActive: { backgroundColor: colors.navy },
+  segActive: { backgroundColor: colors.accent },
   segText: { fontWeight: '700', color: colors.ink2, fontSize: 13 },
   track: { backgroundColor: colors.border, overflow: 'hidden', width: '100%' },
   badge: { paddingHorizontal: 8, paddingVertical: 3, borderRadius: 999, alignSelf: 'flex-start' },

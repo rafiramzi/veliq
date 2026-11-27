@@ -6,9 +6,11 @@ import { Body, Button, Card, Field, Icon, Label, Muted, NumberField, Row, Screen
 import { dateTimeID, distance } from '../lib/format';
 import { COMPONENTS } from '../lib/lifespan';
 import { isSupabaseConfigured, supabase } from '../lib/supabase';
+import { signOut } from '../services/auth';
 import { ensureNotificationPermission } from '../services/notifications';
 import { flushOutbox, useSyncStatus } from '../services/sync';
 import { stopTrip } from '../services/recorder';
+import { useAuth } from '../store/auth';
 import { useOutbox } from '../store/outbox';
 import { useDocStore, useServiceStore, useTripStore } from '../store/records';
 import { useVehicleStore } from '../store/vehicles';
@@ -21,8 +23,26 @@ export default function SettingsScreen() {
   const [type, setType] = useState<VehicleType>('motor');
   const [matrixKey, setMatrixKey] = useState(0);
 
+  const auth = useAuth();
+
   return (
     <Screen>
+      <SectionHeader title="Akun" />
+      <Card>
+        <Row style={{ justifyContent: 'space-between' }}>
+          <View style={{ flex: 1 }}>
+            <Body style={{ fontWeight: '600' }}>{auth.status === 'user' ? auth.email ?? 'Akun VELIQ' : 'Mode Tamu'}</Body>
+            <Muted>{auth.status === 'user' ? 'Masuk dengan akun' : 'Data hanya tersimpan di perangkat ini.'}</Muted>
+          </View>
+          <Button
+            title={auth.status === 'user' ? 'Keluar' : 'Masuk / Daftar'}
+            variant="outline"
+            small
+            onPress={() => (auth.status === 'user' ? signOut() : auth.reset())}
+          />
+        </Row>
+      </Card>
+
       <SectionHeader title="Component Lifespan Matrix" action="Reset" onAction={() =>
         Alert.alert('Kembalikan ke default?', '', [
           { text: 'Batal', style: 'cancel' },

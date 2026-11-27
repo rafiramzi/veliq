@@ -6,6 +6,14 @@ Aplikasi Android (Expo + React Native + TypeScript) untuk mengurus kendaraan: od
 
 ---
 
+## Login & tema
+
+- Layar `login` (Google, Apple, Tamu) tampil saat belum memilih; status disimpan di `src/store/auth.ts`.
+- Google/Apple memakai **Supabase OAuth**: aktifkan provider di dashboard Supabase dan tambahkan `veliq://auth-callback` ke *Redirect URLs*. Tanpa `.env` Supabase, hanya mode Tamu yang berfungsi.
+- Tema gelap terpusat di `src/theme.ts` (aksen biru `#0A8CFF`); logo ada di `assets/veliq-logo.png`.
+
+---
+
 ## 1. Menjalankan & build APK
 
 Prasyarat: Node.js 20+, akun Expo (gratis) untuk build APK di cloud.

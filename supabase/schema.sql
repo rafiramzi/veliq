@@ -1,5 +1,5 @@
 -- =====================================================================
--- Garasiku — skema Supabase (jalankan di SQL Editor saat siap pindah ke cloud)
+-- Veliq — skema Supabase (jalankan di SQL Editor saat siap pindah ke cloud)
 -- Kolom = versi snake_case dari model di src/types.ts (lihat src/services/sync.ts → toRow).
 -- Semua tabel dilindungi Row Level Security: user hanya bisa membaca/menulis datanya sendiri.
 -- Supabase mengenkripsi seluruh data at-rest (database & Storage) dengan AES-256,

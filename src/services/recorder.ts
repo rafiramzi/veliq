@@ -112,7 +112,7 @@ export async function startTrip(vehicleId: string): Promise<StartResult> {
       foregroundService: {
         notificationTitle: 'VELIQ merekam perjalanan',
         notificationBody: 'Odometer GPS aktif. Ketuk untuk membuka.',
-        notificationColor: '#F97316',
+        notificationColor: '#0A8CFF',
         killServiceOnDestroy: false,
       },
     });

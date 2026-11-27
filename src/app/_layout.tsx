@@ -14,7 +14,9 @@ import {
   rescheduleTaxReminders,
 } from '../services/notifications';
 import { recoverActiveTrip } from '../services/recorder';
+import { startAuth } from '../services/auth';
 import { startSync } from '../services/sync';
+import { useAuth } from '../store/auth';
 import { useHydrated } from '../store/hydration';
 import { useServiceStore } from '../store/records';
 import { useSettings } from '../store/settings';
@@ -30,13 +32,19 @@ export default function RootLayout() {
   const records = useServiceStore((s) => s.records);
   const matrix = useSettings((s) => s.matrix);
   const notificationsEnabled = useSettings((s) => s.notificationsEnabled);
+  const signedIn = useAuth((s) => s.status !== 'none');
 
   useEffect(() => {
     if (!hydrated) return;
     SplashScreen.hideAsync().catch(() => undefined);
     initNotifications().catch(() => undefined);
     recoverActiveTrip().catch(() => undefined);
-    return startSync();
+    const stopAuth = startAuth();
+    const stopSync = startSync();
+    return () => {
+      stopAuth();
+      stopSync();
+    };
   }, [hydrated]);
 
   // Jadwalkan ulang pengingat pajak bila tanggal berubah.
@@ -62,7 +70,7 @@ export default function RootLayout() {
 
   if (!hydrated) {
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.navy }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: colors.bg }}>
         <ActivityIndicator color={colors.accent} />
       </View>
     );
@@ -70,7 +78,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <Stack
         screenOptions={{
           headerStyle: { backgroundColor: colors.bg },
@@ -81,16 +89,22 @@ export default function RootLayout() {
           headerBackTitle: 'Kembali',
         }}
       >
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="vehicle/edit" options={{ title: 'Kendaraan' }} />
-        <Stack.Screen name="vehicles" options={{ title: 'Kendaraan Saya' }} />
-        <Stack.Screen name="odometer" options={{ title: 'Atur Odometer', presentation: 'modal' }} />
-        <Stack.Screen name="service/edit" options={{ title: 'Catat Servis' }} />
-        <Stack.Screen name="trip/[id]" options={{ title: 'Detail Perjalanan' }} />
-        <Stack.Screen name="tax" options={{ title: 'Pajak & Legalitas' }} />
-        <Stack.Screen name="documents" options={{ title: 'Dokumen Digital' }} />
-        <Stack.Screen name="passport" options={{ title: 'Vehicle Passport' }} />
-        <Stack.Screen name="settings" options={{ title: 'Pengaturan' }} />
+        <Stack.Protected guard={!signedIn}>
+          <Stack.Screen name="login" options={{ headerShown: false, animation: 'fade' }} />
+        </Stack.Protected>
+        <Stack.Screen name="auth-callback" options={{ headerShown: false }} />
+        <Stack.Protected guard={signedIn}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="vehicle/edit" options={{ title: 'Kendaraan' }} />
+          <Stack.Screen name="vehicles" options={{ title: 'Kendaraan Saya' }} />
+          <Stack.Screen name="odometer" options={{ title: 'Atur Odometer', presentation: 'modal' }} />
+          <Stack.Screen name="service/edit" options={{ title: 'Catat Servis' }} />
+          <Stack.Screen name="trip/[id]" options={{ title: 'Detail Perjalanan' }} />
+          <Stack.Screen name="tax" options={{ title: 'Pajak & Legalitas' }} />
+          <Stack.Screen name="documents" options={{ title: 'Dokumen Digital' }} />
+          <Stack.Screen name="passport" options={{ title: 'Vehicle Passport' }} />
+          <Stack.Screen name="settings" options={{ title: 'Pengaturan' }} />
+        </Stack.Protected>
       </Stack>
     </SafeAreaProvider>
   );

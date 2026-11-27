@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "Garasiku",
-    "slug": "garasiku",
+    "name": "Veliq",
+    "slug": "veliq",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "scheme": "garasiku",
-    "userInterfaceStyle": "light",
+    "scheme": "veliq",
+    "userInterfaceStyle": "dark",
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.garasiku.app",
+      "bundleIdentifier": "com.veliq.app",
       "infoPlist": {
         "UIBackgroundModes": [
           "location"
@@ -17,7 +17,7 @@
       }
     },
     "android": {
-      "package": "com.garasiku.app",
+      "package": "com.veliq.app",
       "adaptiveIcon": {
         "backgroundColor": "#0F172A",
         "foregroundImage": "./assets/android-icon-foreground.png",
@@ -41,8 +41,8 @@
       [
         "expo-location",
         {
-          "locationAlwaysAndWhenInUsePermission": "Garasiku memakai lokasi untuk menghitung odometer dan merekam rute walau layar mati.",
-          "locationWhenInUsePermission": "Garasiku memakai lokasi untuk menghitung odometer, merekam rute, dan radar touring.",
+          "locationAlwaysAndWhenInUsePermission": "Veliq memakai lokasi untuk menghitung odometer dan merekam rute walau layar mati.",
+          "locationWhenInUsePermission": "Veliq memakai lokasi untuk menghitung odometer, merekam rute, dan radar touring.",
           "isAndroidBackgroundLocationEnabled": true,
           "isAndroidForegroundServiceEnabled": true,
           "isIosBackgroundLocationEnabled": true
@@ -51,14 +51,14 @@
       [
         "expo-notifications",
         {
-          "color": "#F97316"
+          "color": "#0A8CFF"
         }
       ],
       [
         "expo-image-picker",
         {
-          "photosPermission": "Garasiku perlu akses galeri untuk mengunggah foto STNK dan nota servis.",
-          "cameraPermission": "Garasiku perlu kamera untuk memotret STNK dan nota servis.",
+          "photosPermission": "Veliq perlu akses galeri untuk mengunggah foto STNK dan nota servis.",
+          "cameraPermission": "Veliq perlu kamera untuk memotret STNK dan nota servis.",
           "microphonePermission": false
         }
       ],
@@ -69,7 +69,7 @@
         {
           "image": "./assets/splash-icon.png",
           "imageWidth": 160,
-          "backgroundColor": "#0F172A"
+          "backgroundColor": "#0A0B0D"
         }
       ],
       "expo-asset",

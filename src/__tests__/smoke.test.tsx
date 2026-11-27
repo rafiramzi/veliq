@@ -1,5 +1,6 @@
 // Smoke test: semua layar bisa dirender dengan data contoh tanpa error.
 import { fireEvent, renderRouter, screen } from 'expo-router/testing-library';
+import { useAuth } from '../store/auth';
 import { useVehicleStore } from '../store/vehicles';
 import { useDocStore, useServiceStore, useTripStore } from '../store/records';
 import { createRecorderState, finalizeTrip, ingestFix } from '../lib/tripCore';
@@ -68,6 +69,7 @@ jest.setTimeout(60_000);
 
 describe('smoke: render semua layar', () => {
   beforeAll(() => {
+    useAuth.setState({ status: 'guest' });
     seed();
   });
 
@@ -83,7 +85,22 @@ describe('smoke: render semua layar', () => {
   });
 });
 
+describe('login', () => {
+  it('belum login menampilkan halaman login, tamu masuk ke beranda', async () => {
+    useAuth.setState({ status: 'none' });
+    await renderRouter('./src/app', { initialUrl: '/' });
+    expect(await screen.findByText('Daftar dengan Google')).toBeTruthy();
+    expect(screen.getByText('Daftar dengan Apple')).toBeTruthy();
+    await fireEvent.press(screen.getByText('Lanjutkan sebagai Tamu'));
+    expect(useAuth.getState().status).toBe('guest');
+  });
+});
+
 describe('alur interaksi', () => {
+  beforeAll(() => {
+    useAuth.setState({ status: 'guest' });
+  });
+
   it('tambah kendaraan lalu catat servis oli', async () => {
     useVehicleStore.setState({ vehicles: [], activeId: null });
     useServiceStore.setState({ records: [] });
