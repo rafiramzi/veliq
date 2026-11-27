@@ -79,6 +79,9 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <StatusBar style="light" />
+      {/* Di web/tablet, batasi lebar seperti layar HP dan tengahkan. */}
+      <View style={{ flex: 1, backgroundColor: colors.bg, alignItems: 'center' }}>
+      <View style={{ flex: 1, width: '100%', maxWidth: 520 }}>
       <Stack
         screenOptions={{
           headerStyle: { backgroundColor: colors.bg },
@@ -106,6 +109,8 @@ export default function RootLayout() {
           <Stack.Screen name="settings" options={{ title: 'Pengaturan' }} />
         </Stack.Protected>
       </Stack>
+      </View>
+      </View>
     </SafeAreaProvider>
   );
 }
